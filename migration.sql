@@ -24,15 +24,15 @@ CREATE TABLE ads (
         ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS categories (
+CREATE TABLE categories (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     name VARCHAR(240) NOT NULL,
     PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS ad_category (
+CREATE TABLE ad_category (
     ad_id INT UNSIGNED NOT NULL,
     category_id INT UNSIGNED NOT NULL,
-    FOREIGN KEY (ad_id) REFERENCES categories(id),
-    FOREIGN KEY (category_id) REFERENCES ads(id)
+    FOREIGN KEY (ad_id) REFERENCES ads(id),
+    FOREIGN KEY (category_id) REFERENCES categories(id)
 );
