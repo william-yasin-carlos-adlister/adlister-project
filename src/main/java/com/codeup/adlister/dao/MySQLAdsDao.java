@@ -71,4 +71,19 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
+    public Ad getById(long id) {
+        try {
+            String insertQuery = "SELECT * FROM ads WHERE id = ? LIMIT 1";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery); //for connection
+            stmt.setLong(1,id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+             return extractAd(rs);
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving add.", e);
+        }
+    }
 }
