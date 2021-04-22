@@ -13,9 +13,12 @@
     <h1>Here Are all the ads!</h1>
 
     <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6">
-            <h2>${ad.title}</h2>
-            <p>${ad.description}</p>
+        <div class="card mt-2 mr-2 ml-2 mb-2 border border-dark" style="width: 18rem;" >
+            <div class="card-body">
+                <h5 class="card-title"><a href="details?id=${ad.id}" class=" stretched-link">${ad.title}</a></h5>
+                <p class="card-text">${ad.description}</p>
+                <p>Click to see more details</p>
+            </div>
         </div>
     </c:forEach>
 </div>

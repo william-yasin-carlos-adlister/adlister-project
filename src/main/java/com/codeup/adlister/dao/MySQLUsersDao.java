@@ -1,5 +1,6 @@
 package com.codeup.adlister.dao;
 
+import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
@@ -62,5 +63,20 @@ public class MySQLUsersDao implements Users {
                 rs.getString("password")
         );
     }
+
+//    public User getUserById(long id) {
+//        try {
+//            String insertQuery = "SELECT * FROM ads WHERE id = ? LIMIT 1";
+//            PreparedStatement stmt = connection.prepareStatement(insertQuery); //for connection
+//            stmt.setLong(1,id);
+//            ResultSet rs = stmt.executeQuery();
+//            while (rs.next()) {
+//                return extractUser(rs);
+//            }
+//            return null;
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error retrieving username.", e);
+//        }
+//    }
 
 }
