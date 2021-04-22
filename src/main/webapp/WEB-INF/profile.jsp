@@ -11,21 +11,25 @@
 
     <div class="container">
         <h1>Welcome, ${sessionScope.user.username}!</h1>
-    </div>
 
-    <div>
-        <button class="btn-primary btn"><a href="/ads/create">Create Ad</a> </button>
-    </div>
-
-    <c:forEach var="ad" items="${ads}">
-        <div class="col-md-6 card mt-2 mr-2 ml-2 mb-2 border border-dark" style="width: 18rem;" >
-            <div class="card-body">
-                <h5 class="card-title"><a href="#" class=" stretched-link">${ad.title}</a></h5>
-                <p class="card-text">${ad.description}</p>
-                <p>Click to see more details</p>
-            </div>
+        <div>
+            <button class="btn-primary btn"><a class="text-light" href="/ads/create">Create Ad</a> </button>
         </div>
-    </c:forEach>
+
+        <h2>My Ads</h2>
+        <c:forEach var="ad" items="${ads}">
+            <div class="col-md-6 card mt-2 mr-2 ml-2 mb-2 border border-dark" style="width: 18rem;" >
+                <div class="card-body">
+                    <h5 class="card-title"><a href="#" class=" stretched-link">${ad.title}</a></h5>
+                    <p class="card-text">${ad.description}</p>
+                    <p>Click to see more details</p>
+                </div>
+            </div>
+        </c:forEach>
+
+    </div>
+
+
 
 
 </body>
