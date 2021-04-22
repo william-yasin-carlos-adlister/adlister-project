@@ -19,13 +19,14 @@
     <form action="/ads/edit" method="post">
         <div class="form-group">
             <label for="title">Title</label>
-            <input id="title" name="title" class="form-control" type="text" placeholder="TITLE" value="">
+            <input id="title" name="title" class="form-control" type="text" placeholder="TITLE" value="${ad.title}" required>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea id="description" name="description" class="form-control" type="text" placeholder="DESCRIPTION" value=""></textarea>
+            <textarea id="description" name="description" class="form-control" placeholder="DESCRIPTION" value="${ad.description}"></textarea>
         </div>
-        <input type="button" class="btn btn-block btn-primary" value="Update">
+        <input type="hidden" value="${ad.id}" name="id">
+        <input type="submit" class="btn btn-block btn-success" value="Update">
     </form>
 </div>
 
