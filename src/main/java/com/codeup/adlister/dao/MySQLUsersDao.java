@@ -64,6 +64,18 @@ public class MySQLUsersDao implements Users {
         );
     }
 
+
+    public void DeleteUserById(long id) {
+        try {
+            String insertQuery = "DELETE FROM users WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery); //connection
+            stmt.setLong(1,id);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting user.", e);
+        }
+    }
+
 //    public User getUserById(long id) {
 //        try {
 //            String insertQuery = "SELECT * FROM ads WHERE id = ? LIMIT 1";
