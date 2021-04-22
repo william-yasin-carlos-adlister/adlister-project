@@ -16,6 +16,7 @@
             <p class="card-text">Description: ${ad.description}</p>
 <%--            <p class="card-text">Created by: ${user.username}</p>--%>
             <a href="/ads" class="btn btn-primary">Ads</a>
+            <a href="/ads/edit?id=${ad.id}" class="btn btn-success">Edit</a>
             <form action="/details" method="POST">
                 <button>Delete</button>
                 <input type="hidden" value="${ad.id}" name="id">
