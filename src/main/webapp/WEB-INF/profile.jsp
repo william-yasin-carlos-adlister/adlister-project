@@ -24,6 +24,7 @@
     <div>
         <button class="btn-primary btn mb3"><a class="text-light" href="/ads/create">Create Ad</a></button>
     </div>
+    <input type="hidden" name="user-id" id="user-id" value="${ad.userId}">
 
     <h2>My Ads</h2>
     <c:forEach var="ad" items="${ads}">
@@ -32,6 +33,7 @@
                 <h5 class="card-title"><a href="#" class=" stretched-link">${ad.title}</a></h5>
                 <p class="card-text">${ad.description}</p>
                 <p>Click to see more details</p>
+
             </div>
         </div>
     </c:forEach>
