@@ -24,6 +24,7 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+
         String titleSearch = req.getParameter("search-title");
 
         // execute search and redirect to /ads results jsp page

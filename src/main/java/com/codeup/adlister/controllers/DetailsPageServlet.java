@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet (name = "controllers.DetailsPageServlet", urlPatterns = "/details")
+@WebServlet(name = "controllers.DetailsPageServlet", urlPatterns = "/details")
 public class DetailsPageServlet extends HttpServlet {
 
     @Override
@@ -19,7 +19,6 @@ public class DetailsPageServlet extends HttpServlet {
         long id = Long.parseLong(req.getParameter("id"));
         try {
             req.setAttribute("ad", DaoFactory.getAdsDao().getById(id));
-//            req.setAttribute("user", DaoFactory.getUsersDao().getUserById(id));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -32,9 +31,10 @@ public class DetailsPageServlet extends HttpServlet {
 
         long id = Long.parseLong(req.getParameter("id"));
 
+
         DaoFactory.getAdsDao().deleteAd(id);
 
-        resp.sendRedirect("/profile");
+        resp.sendRedirect("/profile?userId=" + id);
     }
 
 }
