@@ -9,21 +9,23 @@
 <html>
 <head>
     <jsp:include page="/WEB-INF/partials/head.jsp">
-        <jsp:param name="title" value="Edit User" />
+        <jsp:param name="title" value="Edit User"/>
     </jsp:include>
 </head>
 <body>
-<jsp:include page="/WEB-INF/partials/navbar.jsp" />
+<jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 <div class="container">
     <h1>Edit User</h1>
-    <form action="/ads/user-edit" method="post">
+    <form action="/edit-user" method="post">
         <div class="form-group">
-            <label for="title">Title</label>
-            <input id="title" name="title" class="form-control" type="text" placeholder="USERNAME" value="${user.username}" required>
+            <label for="username">Username</label>
+            <input id="username" name="username" class="form-control" type="text" placeholder="USERNAME"
+                   value="${user.username}" required>
         </div>
         <div class="form-group">
-            <label for="description">Description</label>
-            <textarea id="description" name="description" class="form-control" placeholder="EMAIL" value="${user.email}"></textarea>
+            <label for="email">Email</label>
+            <textarea id="email" name="email" class="form-control" placeholder="EMAIL" value="${user.email}"
+                      required></textarea>
         </div>
         <input type="hidden" value="${user.id}" name="id">
         <input type="submit" class="btn btn-block btn-success" value="Update">

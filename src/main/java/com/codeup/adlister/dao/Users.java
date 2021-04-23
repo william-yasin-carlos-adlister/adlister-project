@@ -9,4 +9,5 @@ public interface Users {
     Long insert(User user);
 //    public User getUserById(long id);
     void DeleteUserById(long id);
+    Long updateUser(User user);
 }

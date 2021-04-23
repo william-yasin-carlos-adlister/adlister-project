@@ -13,20 +13,16 @@
         <h1>Welcome, ${sessionScope.user.username}!</h1>
 
         <form action="/profile" method="POST">
-            <button>Delete User</button>
+            <button class="btn-primary btn">Delete User</button>
             <input type="hidden" name="id" value="${user.id}">
-            <button>Edit User</button>
-            <input type="hidden" name="id" value="${user.id}">
-
-<%--        </form>--%>
-<%--        <form action="/profile" method="POST">--%>
-<%--            <button>Edit User</button>--%>
-<%--            <input type="hidden" name="id" value="${user.id}">--%>
-<%--        </form>--%>
-
+        </form>
 
         <div>
-            <button class="btn-primary btn"><a class="text-light" href="/ads/create">Create Ad</a> </button>
+            <button class="btn-primary btn mb3"><a class="text-light" href="/edit-user">Edit User</a> </button>
+        </div>
+
+        <div>
+            <button class="btn-primary btn mb3"><a class="text-light" href="/ads/create">Create Ad</a> </button>
         </div>
 
         <h2>My Ads</h2>
