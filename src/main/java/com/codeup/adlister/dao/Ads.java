@@ -17,4 +17,6 @@ public interface Ads {
     Ad getById(long id);
 
     void deleteAd(long id);
+
+    List<Ad> searchAdsByTitle(String title);
 }

@@ -9,10 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "controllers.AdsIndexServlet", urlPatterns = "/ads")
+@WebServlet(name = "controllers.AdsIndexServlet", urlPatterns = "/search-results")
 public class AdsIndexServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ads", DaoFactory.getAdsDao().all());
-        request.getRequestDispatcher("/WEB-INF/ads/index.jsp").forward(request, response);
+
+        // Hit DAO access object MySQLAdsDao to search by title
+        request.setAttribute("ads", DaoFactory.getAdsDao().searchAdsByTitle(request.getParameter("title")));
+        request.getRequestDispatcher("/WEB-INF/ads/search-results.jsp").forward(request, response);
     }
+
 }
