@@ -10,6 +10,8 @@
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
 
 <div class="container">
+    <c:choose>
+        <c:when test="${sessionScope.user != null}">
     <h1>Welcome, ${sessionScope.user.username}!</h1>
 
     <form action="/profile" method="POST">
@@ -30,13 +32,46 @@
     <c:forEach var="ad" items="${ads}">
         <div class="col-md-6 card mt-2 mr-2 ml-2 mb-2 border border-dark" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title"><a href="#" class=" stretched-link">${ad.title}</a></h5>
+                <h5 class="card-title"><a href="details?id=${ad.id}" class=" stretched-link">${ad.title}</a></h5>
                 <p class="card-text">${ad.description}</p>
                 <p>Click to see more details</p>
 
             </div>
         </div>
     </c:forEach>
+        </c:when>
+    </c:choose>
+    <c:choose>
+        <c:when test="${sessionScope.user == null}">
+<%--            <h1>Welcome, ${sessionScope.user.username}!</h1>--%>
+
+<%--            <form action="/profile" method="POST">--%>
+<%--                <button class="btn-primary btn">Delete User</button>--%>
+<%--                <input type="hidden" name="id" value="${user.id}">--%>
+<%--            </form>--%>
+
+<%--            <div>--%>
+<%--                <button class="btn-primary btn mb3"><a class="text-light" href="/edit-user">Edit User</a></button>--%>
+<%--            </div>--%>
+
+<%--            <div>--%>
+<%--                <button class="btn-primary btn mb3"><a class="text-light" href="/ads/create">Create Ad</a></button>--%>
+<%--            </div>--%>
+            <input type="hidden" name="user-id" id="user-id" value="${ad.userId}">
+
+            <h2>All Ads</h2>
+            <c:forEach var="ad" items="${ads}">
+                <div class="col-md-6 card mt-2 mr-2 ml-2 mb-2 border border-dark" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="details?id=${ad.id}" class=" stretched-link">${ad.title}</a></h5>
+                        <p class="card-text">${ad.description}</p>
+                        <p>Click to see more details</p>
+                    </div>
+                </div>
+            </c:forEach>
+        </c:when>
+    </c:choose>
+
 
 
 </div>

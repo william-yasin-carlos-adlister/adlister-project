@@ -12,9 +12,9 @@
     <div class="card mt3 mb3 mr3 ml3 container">
         <h5 class="card-header">Title: ${ad.title}</h5>
         <div class="card-body">
-            <h5 class="card-title">User Id: ${ad.userId}</h5>
+            <%--  *******   show username is not working when user is not logged in ***** --%>
+            <h5 class="card-title"><a href="/profile">Created By: ${user.getUsername()}</a></h5>
             <p class="card-text">Description: ${ad.description}</p>
-<%--            <p class="card-text">Created by: ${user.username}</p>--%>
             <a href="/ads" class="btn btn-primary">Ads</a>
             <a href="/ads/edit?id=${ad.id}" class="btn btn-success">Edit</a>
             <form action="/details" method="POST">

@@ -15,9 +15,11 @@ public class ViewProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if (request.getSession().getAttribute("user") == null) {
-            response.sendRedirect("/login");
-            return;
+            long id = Long.parseLong(request.getParameter("userId"));
+            request.setAttribute("ads", DaoFactory.getAdsDao().adsByUserId(id));
+            request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
         }
+
 
         User loggedInUser = (User) request.getSession().getAttribute("user");
 
@@ -31,5 +33,12 @@ public class ViewProfileServlet extends HttpServlet {
         DaoFactory.getUsersDao().DeleteUserById(id);
         req.getSession().invalidate(); //ends the session
         resp.sendRedirect("/register");
+
+        // /// //
+        String titleSearch = req.getParameter("search-title");
+
+        DaoFactory.getAdsDao().searchAdsByTitle(titleSearch);
+        resp.sendRedirect("/search-results?title=" + titleSearch);
+
     }
 }
