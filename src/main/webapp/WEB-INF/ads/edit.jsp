@@ -19,11 +19,11 @@
     <form action="/ads/edit" method="post">
         <div class="form-group">
             <label for="title">Title</label>
-            <input id="title" name="title" class="form-control" type="text" placeholder="TITLE" value="${ad.title}" required>
+           <input id="title" name="title" class="form-control" type="text" placeholder="TITLE" value="${ad.title}" required> <%-- adding required to field to make sure it's not left empty by user--%>
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea id="description" name="description" class="form-control" placeholder="DESCRIPTION" value="${ad.description}"></textarea>
+            <textarea id="description" name="description" class="form-control" placeholder="DESCRIPTION" value="${ad.description}" required></textarea> <%-- adding required to field to make sure it's not left empty by user--%>
         </div>
         <input type="hidden" value="${ad.id}" name="id">
         <input type="submit" class="btn btn-block btn-success" value="Update">
