@@ -13,7 +13,14 @@
         <form action="/profile" method="POST">
             <button>Delete User</button>
             <input type="hidden" name="id" value="${user.id}">
-        </form>
+            <button>Edit User</button>
+            <input type="hidden" name="id" value="${user.id}">
+
+<%--        </form>--%>
+<%--        <form action="/profile" method="POST">--%>
+<%--            <button>Edit User</button>--%>
+<%--            <input type="hidden" name="id" value="${user.id}">--%>
+<%--        </form>--%>
     </div>
 
 </body>
