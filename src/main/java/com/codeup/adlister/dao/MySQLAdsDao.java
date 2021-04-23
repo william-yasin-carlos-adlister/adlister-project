@@ -55,6 +55,21 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    @Override
+    public Long updateAd(Ad ad) {
+        String updateQuery = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(updateQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setLong(3, ad.getId());
+            stmt.executeUpdate();
+            return ad.getId();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating ad", e);
+        }
+    }
+
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
             rs.getLong("id"),
@@ -83,7 +98,22 @@ public class MySQLAdsDao implements Ads {
             }
             return null;
         } catch (SQLException e) {
-            throw new RuntimeException("Error retrieving add.", e);
+            throw new RuntimeException("Error retrieving ad.", e);
         }
     }
+
+    public void deleteAd(long id) {
+
+        try {
+            String deleteQuery = "DELETE FROM ads WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(deleteQuery);
+            stmt.setLong(1, id);
+            stmt.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting ad", e);
+        }
+
+    }
+
 }
