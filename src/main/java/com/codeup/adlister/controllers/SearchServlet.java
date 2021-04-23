@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "controllers.SearchServlet", urlPatterns = "/home")
+@WebServlet(name = "controllers.SearchServlet", urlPatterns = "/")
 public class SearchServlet extends HttpServlet {
 
 
@@ -28,7 +28,7 @@ public class SearchServlet extends HttpServlet {
 
         // execute search and redirect to /ads results jsp page
         DaoFactory.getAdsDao().searchAdsByTitle(titleSearch);
-        resp.sendRedirect("/ads");
+        resp.sendRedirect("/search-results?title=" + titleSearch);
 
     }
 

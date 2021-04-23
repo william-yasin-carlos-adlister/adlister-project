@@ -3,25 +3,19 @@
 <html>
 <head>
     <jsp:include page="/WEB-INF/partials/head.jsp">
-        <jsp:param name="title" value="Viewing All The Ads" />
+        <jsp:param name="title" value="Welcome to my site!" />
     </jsp:include>
 </head>
 <body>
-<jsp:include page="/WEB-INF/partials/navbar.jsp" />
+    <jsp:include page="/WEB-INF/partials/navbar.jsp" />
+    <div class="container">
+        <h1>Welcome to the Adlister!</h1>
+    </div>
 
-<div class="container">
-    <h1>Here Are all the ads!</h1>
-
-    <c:forEach var="ad" items="${ads}">
-        <div class="card mt-2 mr-2 ml-2 mb-2 border border-dark" style="width: 18rem;" >
-            <div class="card-body">
-                <h5 class="card-title"><a href="details?id=${ad.id}" class=" stretched-link">${ad.title}</a></h5>
-                <p class="card-text">${ad.description}</p>
-                <p>Click to see more details</p>
-            </div>
-        </div>
-    </c:forEach>
-</div>
+    <form action="/" method="POST">
+        <input type="text" id="search-title" name="search-title" placeholder="Enter title">
+        <button>Search</button>
+    </form>
 
 </body>
 </html>
