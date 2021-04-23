@@ -11,5 +11,11 @@
     <div class="container">
         <h1>Welcome to the Adlister!</h1>
     </div>
+
+    <form action="/home" method="POST">
+        <input type="text" id="search-title" name="search-title" placeholder="Enter title">
+        <button>Search</button>
+    </form>
+
 </body>
 </html>
