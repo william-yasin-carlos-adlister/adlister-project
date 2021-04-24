@@ -16,6 +16,7 @@ public class AdsIndexServlet extends HttpServlet {
 
         // Hit DAO access object MySQLAdsDao to search by title
         request.setAttribute("albums", DaoFactory.getAlbumsDao().searchAlbumsByTitle(request.getParameter("title")));
+
         request.getRequestDispatcher("/WEB-INF/ads/search-results.jsp").forward(request, response);
     }
 
