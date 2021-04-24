@@ -12,11 +12,13 @@
 <div class="container">
     <h1>Here Are all the ads!</h1>
 
-    <c:forEach var="ad" items="${ads}">
+
+<%--    Need choose/when to display albums or artist search results....   --%>
+    <c:forEach var="album" items="${albums}">
         <div class="card mt-2 mr-2 ml-2 mb-2 border border-dark" style="width: 18rem;" >
             <div class="card-body">
-                <h5 class="card-title"><a href="details?id=${ad.id}" class=" stretched-link">${ad.title}</a></h5>
-                <p class="card-text">${ad.description}</p>
+                <h5 class="card-title"><a href="details?id=${album.id}" class=" stretched-link">${album.title}</a></h5>
+                <p class="card-text">${album.price}</p>
                 <p>Click to see more details</p>
             </div>
         </div>

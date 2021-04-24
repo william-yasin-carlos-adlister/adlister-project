@@ -26,9 +26,16 @@ public class SearchServlet extends HttpServlet {
 
 
         String titleSearch = req.getParameter("search-title");
+        String artistSearch = req.getParameter("search-artist");
+
+        if (titleSearch == null) {
+            DaoFactory.getArtistsDao().searchArtistsByName(artistSearch);
+        } else if (artistSearch == null) {
+            DaoFactory.getAlbumsDao().searchAlbumsByTitle(titleSearch);
+        }
 
         // execute search and redirect to /ads results jsp page
-        DaoFactory.getAdsDao().searchAdsByTitle(titleSearch);
+
         resp.sendRedirect("/search-results?title=" + titleSearch);
 
     }
