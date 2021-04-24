@@ -11,6 +11,7 @@ import java.io.IOException;
 
 @WebServlet(name = "controllers.AdsIndexServlet", urlPatterns = "/search-results")
 public class AdsIndexServlet extends HttpServlet {
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // Hit DAO access object MySQLAdsDao to search by title
