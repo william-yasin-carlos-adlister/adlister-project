@@ -72,6 +72,8 @@ public class MySQLAlbumsDao implements Albums {
         } catch (SQLException e) {
             throw new RuntimeException("Error creating a new ad.", e);
         }
+
+
     }
 
 

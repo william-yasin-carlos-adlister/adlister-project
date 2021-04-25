@@ -30,23 +30,23 @@ public class CreateAdServlet extends HttpServlet {
         Artist artist = new Artist(
                 request.getParameter("artist_name")
         );
+        DaoFactory.getArtistsDao().insert(artist);
 
         Double price = Double.parseDouble(request.getParameter("price"));
+
         Album album = new Album(
                 request.getParameter("album_title"),
-                12872,
                 price
         );
+        DaoFactory.getAlbumsDao().insert(album);
 
         Ad ad = new Ad(
                 user.getId(),
                 request.getParameter("ad_title"),
                 request.getParameter("description")
         );
-        DaoFactory.getArtistsDao().insert(artist);
-        DaoFactory.getAlbumsDao().insert(album);
         DaoFactory.getAdsDao().insert(ad);
 
-        response.sendRedirect("/ads");
+        response.sendRedirect("/");
     }
 }
