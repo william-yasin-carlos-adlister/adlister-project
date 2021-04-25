@@ -12,12 +12,14 @@
 
 <div class="container">
     <h1>Welcome to the Waxlister!</h1>
+    <br>
     <div>
-        <h3>Search by album title, artist:</h3>
         <form action="/" method="POST">
+            <label for="search-title">Search by album title: </label>
             <input type="text" id="search-title" name="search-title" placeholder="Enter album title">
+            <label for="search-artist">Search by artist: </label>
             <input type="text" id="search-artist" name="search-artist" placeholder="Enter artist name">
-<%--     if we do search by ad...   insert search by ad as well.... just get old code and put back in and use adsDao --%>
+            <%--     if we do search by ad...   insert search by ad as well.... just get old code and put back in and use adsDao --%>
             <button>Search</button>
         </form>
     </div>

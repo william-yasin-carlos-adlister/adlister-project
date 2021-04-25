@@ -30,7 +30,7 @@ public class MySQLAdsDao implements Ads {
     public List<Ad> all() {
         PreparedStatement stmt = null;
         try {
-            stmt = connection.prepareStatement("SELECT * FROM ads");
+            stmt = connection.prepareStatement("SELECT * FROM wax_ads");
             ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
@@ -41,10 +41,10 @@ public class MySQLAdsDao implements Ads {
     @Override
     public Long insert(Ad ad) {
         try {
-            String insertQuery = "INSERT INTO ads(user_id, title, description) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO wax_ads(user_id, ad_title, description) VALUES (?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
-            stmt.setString(2, ad.getTitle());
+            stmt.setString(2, ad.getAdTitle());
             stmt.setString(3, ad.getDescription());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
@@ -57,10 +57,10 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Long updateAd(Ad ad) {
-        String updateQuery = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
+        String updateQuery = "UPDATE wax_ads SET ad_title = ?, description = ? WHERE id = ?";
         try {
             PreparedStatement stmt = connection.prepareStatement(updateQuery, Statement.RETURN_GENERATED_KEYS);
-            stmt.setString(1, ad.getTitle());
+            stmt.setString(1, ad.getAdTitle());
             stmt.setString(2, ad.getDescription());
             stmt.setLong(3, ad.getId());
             stmt.executeUpdate();
@@ -74,7 +74,7 @@ public class MySQLAdsDao implements Ads {
         return new Ad(
             rs.getLong("id"),
             rs.getLong("user_id"),
-            rs.getString("title"),
+            rs.getString("ad_title"),
             rs.getString("description")
         );
     }
@@ -89,7 +89,7 @@ public class MySQLAdsDao implements Ads {
 
     public Ad getById(long id) {
         try {
-            String insertQuery = "SELECT * FROM ads WHERE id = ? LIMIT 1";
+            String insertQuery = "SELECT * FROM wax_ads WHERE id = ? LIMIT 1";
             PreparedStatement stmt = connection.prepareStatement(insertQuery); //for connection
             stmt.setLong(1,id);
             ResultSet rs = stmt.executeQuery();
@@ -105,7 +105,7 @@ public class MySQLAdsDao implements Ads {
     public void deleteAd(long id) {
 
         try {
-            String deleteQuery = "DELETE FROM ads WHERE id = ?";
+            String deleteQuery = "DELETE FROM wax_ads WHERE id = ?";
             PreparedStatement stmt = connection.prepareStatement(deleteQuery);
             stmt.setLong(1, id);
             stmt.execute();
@@ -118,7 +118,7 @@ public class MySQLAdsDao implements Ads {
 
     public List<Ad> searchAdsByTitle(String title) {
         PreparedStatement stmt = null;
-        String sqlSearch = "SELECT * FROM ads WHERE title LIKE ?";
+        String sqlSearch = "SELECT * FROM wax_ads WHERE title LIKE ?";
         title = "%" + title + "%";
         try {
             stmt = connection.prepareStatement(sqlSearch);
@@ -131,7 +131,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     public List<Ad> adsByUserId(long userId) {
-        String searchSql = "SELECT * FROM ads WHERE user_id = ?";
+        String searchSql = "SELECT * FROM wax_ads WHERE user_id = ?";
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(searchSql);
