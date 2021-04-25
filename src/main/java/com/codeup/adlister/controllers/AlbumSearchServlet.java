@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "controllers.AdsIndexServlet", urlPatterns = "/album-results")
+@WebServlet(name = "controllers.AlbumSearchServlet", urlPatterns = "/album-results")
 public class AlbumSearchServlet extends HttpServlet {
 
     @Override
