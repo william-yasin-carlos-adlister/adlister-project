@@ -9,15 +9,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "controllers.AdsIndexServlet", urlPatterns = "/search-results")
+// renamed to artist-results from search-results and added another servlet with album-results
+@WebServlet(name = "controllers.AdsIndexServlet", urlPatterns = "/artist-results")
 public class AdsIndexServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        // Hit DAO access object MySQLAdsDao to search by title
-        request.setAttribute("albums", DaoFactory.getAlbumsDao().searchAlbumsByTitle(request.getParameter("title")));
+        String artistName = request.getParameter("artist");
 
-        request.getRequestDispatcher("/WEB-INF/ads/search-results.jsp").forward(request, response);
+        // Hit DAO access object MySQLArtistDao to search by artist
+            request.setAttribute("artist", DaoFactory.getArtistsDao().searchArtistsByName(artistName));
+            request.getRequestDispatcher("/WEB-INF/ads/search-results.jsp").forward(request, response);
+
+
     }
 
 }
