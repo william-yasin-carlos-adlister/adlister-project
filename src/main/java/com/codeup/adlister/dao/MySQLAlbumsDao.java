@@ -61,7 +61,7 @@ public class MySQLAlbumsDao implements Albums {
 
     public Long insert(Album album) {
         try {
-            String insertQuery = "INSERT INTO albums(title, price) SET artist_id = ( SELECT a.id FROM artists a WHERE (?) ) ";
+            String insertQuery = "INSERT INTO albums(title, artist_id, price) VALUES (?, artist_id = LAST_INSERT_ID(), ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, album.getTitle());
             stmt.setDouble(2, album.getPrice());

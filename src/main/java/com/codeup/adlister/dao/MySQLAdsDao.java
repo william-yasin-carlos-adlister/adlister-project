@@ -41,7 +41,7 @@ public class MySQLAdsDao implements Ads {
     @Override
     public Long insert(Ad ad) {
         try {
-            String insertQuery = "INSERT INTO wax_ads(user_id, ad_title, description) VALUES (?, ?, ?)";
+            String insertQuery = "INSERT INTO wax_ads(user_id, ad_title, description, album_id) VALUES (?, ?, ?, LAST_INSERT_ID())";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getAdTitle());
