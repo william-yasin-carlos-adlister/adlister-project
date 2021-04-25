@@ -1,5 +1,6 @@
 package com.codeup.adlister.dao;
 
+import com.codeup.adlister.models.Album;
 import com.codeup.adlister.models.Artist;
 import com.mysql.cj.jdbc.Driver;
 
@@ -52,6 +53,20 @@ public class MySQLArtistsDao implements Artists {
             return createArtistsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving ads search by title.", e);
+        }
+    }
+
+    public Long insert(Artist artist) {
+        try {
+            String insertQuery = "INSERT INTO artists(name) VALUES (?)";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, artist.getName());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            return rs.getLong(1);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating a new ad.", e);
         }
     }
 

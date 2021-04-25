@@ -16,6 +16,19 @@ public class Album {
         this.price = price;
     }
 
+    public Album(String title, long artistID, double price) {
+
+        this.title = title;
+        this.artistID = artistID;
+        this.price = price;
+    }
+
+    public Album(String title, double price) {
+
+        this.title = title;
+        this.price = price;
+    }
+
     public long getId() {
         return id;
     }

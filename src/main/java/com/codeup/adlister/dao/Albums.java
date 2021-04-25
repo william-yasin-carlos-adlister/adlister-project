@@ -7,4 +7,5 @@ import java.util.List;
 public interface Albums {
 
     List<Album> searchAlbumsByTitle(String title);
+    Long insert(Album album);
 }

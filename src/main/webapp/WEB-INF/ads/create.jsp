@@ -8,25 +8,29 @@
 <body>
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
     <div class="container">
-        <h1>Create a new Ad</h1>
+        <h1>Create a new Wax Ad</h1>
         <form action="/ads/create" method="post">
             <div class="form-group">
-                <label for="title">Title</label>
-                <input id="title" name="title" class="form-control" type="text" required> <%-- adding required to field to make sure it's not left empty by user--%>
+                <label for="ad_title">Ad Title</label>
+                <input id="ad_title" name="ad_title" class="form-control" type="text" required> <%-- adding required to field to make sure it's not left empty by user--%>
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea id="description" name="description" class="form-control" type="text" required></textarea> <%-- adding required to field to make sure it's not left empty by user--%>
+                <input id="description" name="description" class="form-control" type="text" required> <%-- adding required to field to make sure it's not left empty by user--%>
             </div>
-<%--            <div class="form-group">--%>
-<%--                <label for="title">Title</label>--%>
-<%--                <select id="category" name="title" class="form-control">--%>
-<%--                    <option value=""></option>--%>
-<%--                    <option value=""></option>--%>
-<%--                    <option value=""></option>--%>
-<%--                    <option value=""></option>--%>
-<%--                </select>--%>
-<%--            </div>--%>
+            <div class="form-group">
+                <label for="artist_name">Artist Name</label>
+                <input id="artist_name" name="artist_name" class="form-control" type="text" required> <%-- adding required to field to make sure it's not left empty by user--%>
+            </div>
+            <div class="form-group">
+                <label for="album_title">Album Title</label>
+                <input id="album_title" name="album_title" class="form-control" type="text" required> <%-- adding required to field to make sure it's not left empty by user--%>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <textarea id="price" name="price" class="form-control" type="text" required></textarea> <%-- adding required to field to make sure it's not left empty by user--%>
+            </div>
+
             <input type="submit" class="btn btn-block btn-primary" value="Add">
         </form>
     </div>

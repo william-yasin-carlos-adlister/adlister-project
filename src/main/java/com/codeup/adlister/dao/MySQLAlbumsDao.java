@@ -1,5 +1,6 @@
 package com.codeup.adlister.dao;
 
+import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.Album;
 import com.mysql.cj.jdbc.Driver;
 
@@ -54,6 +55,22 @@ public class MySQLAlbumsDao implements Albums {
             return createAlbumsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving ads search by title.", e);
+        }
+    }
+
+
+    public Long insert(Album album) {
+        try {
+            String insertQuery = "INSERT INTO albums(title, price) SET artist_id = ( SELECT a.id FROM artists a WHERE (?) ) ";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, album.getTitle());
+            stmt.setDouble(2, album.getPrice());
+            stmt.executeUpdate();
+            ResultSet rs = stmt.getGeneratedKeys();
+            rs.next();
+            return rs.getLong(1);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error creating a new ad.", e);
         }
     }
 
