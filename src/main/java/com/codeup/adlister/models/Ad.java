@@ -9,6 +9,15 @@ public class Ad {
     private String description;
     private Album album;
 
+    public Ad(long id, long userId, String adTitle, long albumId, String description, Album album) {
+        this.id = id;
+        this.userId = userId;
+        this.adTitle = adTitle;
+        this.albumId = albumId;
+        this.description = description;
+        this.album = album;
+    }
+
     public Ad(long id, long userId, long artistId, long albumId, String adTitle, String description) {
         this.id = id;
         this.userId = userId;
@@ -43,6 +52,19 @@ public class Ad {
     public Ad(String adTitle, String description) {
         this.adTitle = adTitle;
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Ad{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", artistId=" + artistId +
+                ", albumId=" + albumId +
+                ", adTitle='" + adTitle + '\'' +
+                ", description='" + description + '\'' +
+                ", album=" + album +
+                '}';
     }
 
     public long getId() {
@@ -92,4 +114,5 @@ public class Ad {
     public void setAlbum(Album album) {
         this.album = album;
     }
+
 }
