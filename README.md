@@ -1,7 +1,5 @@
 # W A X L I S T E R
 
----
-
 ### Table of Contents
 - [Description](#description)
 - [Features](#features)
