@@ -76,17 +76,6 @@ public class MySQLAdsDao implements Ads {
 
 
     private Ad extractAd(ResultSet rs) throws SQLException {
-//        System.out.println(rs.getLong("ad.id"));
-//        System.out.println(rs.getLong("ad.user_id"));
-//        System.out.println(rs.getString("ad.ad_title"));
-//        System.out.println(rs.getLong("ad.album_id"));
-//        System.out.println(rs.getString("ad.description"));
-//        System.out.println(rs.getLong("al.id"));
-//        System.out.println(rs.getString("al.title"));
-//        System.out.println(rs.getDouble("al.price"));
-//        System.out.println(rs.getLong("ar.id"));
-//        System.out.println(rs.getString("ar.name"));
-//        return new Ad(1, 1, "test title", 1, "some description", new Album(1, "album title", 2.0, new Artist(1, "artist name")));
         return new Ad(
                 rs.getLong("ad.id"),
                 rs.getLong("ad.user_id"),
