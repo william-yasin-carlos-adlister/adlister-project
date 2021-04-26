@@ -61,17 +61,13 @@ public class MySQLAlbumsDao implements Albums {
 
 
     public Long insert(Album album) {
-        Artist artist = new Artist();
         try {
-            String insertQuery = "INSERT INTO albums(title, price) VALUES (?, ?)";
-            String updateQuery = "UPDATE albums SET artist_id = replace(artist_id, (SELECT name FROM artists where name = ?), null)";
+            String insertQuery = "INSERT INTO albums(title, artist_id, price) VALUES (?, ?, ?)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-            PreparedStatement stmt1 = connection.prepareStatement(updateQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, album.getTitle());
-            stmt.setDouble(2, album.getPrice());
-            stmt1.setString(1, artist.getName());
+            stmt.setLong(2, album.getArtistID());
+            stmt.setDouble(3, album.getPrice());
             stmt.executeUpdate();
-            stmt1.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             return rs.getLong(1);

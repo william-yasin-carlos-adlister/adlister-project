@@ -29,38 +29,35 @@ public class CreateAdServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
         Artist artist = null;
-        try {
+        long artistId = 0;
+        long albumId = 0;
+
             artist = new Artist(
                     request.getParameter("artist_name")
             );
-            DaoFactory.getArtistsDao().insert(artist);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            artistId = DaoFactory.getArtistsDao().insert(artist);
+
+
 
         Double price = Double.parseDouble(request.getParameter("price"));
 
         Album album = null;
-        try {
             album = new Album(
                     request.getParameter("album_title"),
+                    artistId,
                     price
             );
-            DaoFactory.getAlbumsDao().insert(album);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            albumId = DaoFactory.getAlbumsDao().insert(album);
 
-        try {
             Ad ad = new Ad(
                     user.getId(),
+                    artistId,
+                    albumId,
                     request.getParameter("ad_title"),
                     request.getParameter("description")
             );
             DaoFactory.getAdsDao().insert(ad);
-        } catch (Exception e) {
-            throw new RuntimeException("Could not create ad from form.", e);
-        }
+
 
         response.sendRedirect("/");
     }
