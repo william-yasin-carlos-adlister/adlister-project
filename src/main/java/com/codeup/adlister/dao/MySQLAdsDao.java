@@ -19,9 +19,9 @@ public class MySQLAdsDao implements Ads {
         try {
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
-                config.getUrl(),
-                config.getUser(),
-                config.getPassword()
+                    config.getUrl(),
+                    config.getUser(),
+                    config.getPassword()
             );
         } catch (SQLException e) {
             throw new RuntimeException("Error connecting to the database!", e);
@@ -49,7 +49,7 @@ public class MySQLAdsDao implements Ads {
             stmt.setString(2, ad.getAdTitle());
             stmt.setLong(3, ad.getArtistId());
             stmt.setLong(4, ad.getAlbumId());
-            stmt.setString(5,ad.getDescription());
+            stmt.setString(5, ad.getDescription());
             stmt.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
@@ -74,32 +74,23 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+
     private Ad extractAd(ResultSet rs) throws SQLException {
-
-        /*
-            return new Ad(
-                rs.get(id)
-                rs.get(id)
-                description
-                title
-                new Album(
-                    id,
-                    new Artist(
-                        id,
-                        name
-                    )
-
-            );
-         */
-
         return new Ad(
-            rs.getLong("id"),
-            rs.getLong("user_id"),
-            rs.getLong("artist_id"),
-            rs.getLong("album_id"),
-            rs.getString("ad_title"),
-            rs.getString("description")
-        );
+                rs.getLong("ad.id"),
+                rs.getLong("ad.user_id"),
+                rs.getString("ad.ad_title"),
+                rs.getLong("ad.album_id"),
+                rs.getString("ad.description"),
+                new Album(
+                        rs.getLong("al.id"),
+                        rs.getString("al.title"),
+                        rs.getDouble("al.price"),
+                        new Artist(
+                                rs.getLong("ar.id"),
+                                rs.getString("ar.name")
+                        )
+                ));
     }
 
     private List<Ad> createAdsFromResults(ResultSet rs) throws SQLException {
@@ -112,15 +103,16 @@ public class MySQLAdsDao implements Ads {
 
     public Ad getById(long id) {
         try {
-            String insertQuery = "SELECT * FROM wax_ads WHERE id = ? LIMIT 1";
+            String insertQuery = "SELECT ad.*, al.*, ar.* FROM wax_ads ad JOIN albums al ON ad.album_id = al.id JOIN artists ar ON ar.id = al.artist_id WHERE ad.id = ?";
             // select ads.*, albums.*, artists.* JOIN... WHERE id = ?
             PreparedStatement stmt = connection.prepareStatement(insertQuery); //for connection
-            stmt.setLong(1,id);
+            stmt.setLong(1, id);
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                System.out.println(extractAd(rs));
+            if (rs.next()) {
+                return extractAd(rs);
+            } else {
+                return null;
             }
-            return null;
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving ad.", e);
         }
@@ -155,7 +147,7 @@ public class MySQLAdsDao implements Ads {
     }
 
     public List<Ad> adsByUserId(long userId) {
-        String searchSql = "SELECT * FROM wax_ads WHERE user_id = ?";
+        String searchSql = "SELECT ad.*, al.*, ar.* FROM wax_ads ad JOIN albums al ON ad.album_id = al.id JOIN artists ar ON ar.id = al.artist_id WHERE ad.user_id = ?";
         PreparedStatement stmt = null;
         try {
             stmt = connection.prepareStatement(searchSql);
@@ -166,7 +158,6 @@ public class MySQLAdsDao implements Ads {
             throw new RuntimeException("Error finding ads by userId.", e);
         }
     }
-
 
 
 }

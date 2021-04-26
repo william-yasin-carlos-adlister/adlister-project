@@ -17,13 +17,24 @@ public class Album {
         this.price = price;
     }
 
-    public Album(String title, long artistID, double price) {
+    public Album(long id, String title, double price, Artist artist) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.artist = artist;
+    }
 
+    public Album(long id, String title, double price) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+    }
+
+    public Album(String title,long artistID, double price) {
         this.title = title;
         this.artistID = artistID;
         this.price = price;
     }
-
     public Album(String title, double price) {
 
         this.title = title;

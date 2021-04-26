@@ -23,12 +23,12 @@ public class DetailsPageServlet extends HttpServlet {
         String artistName = req.getParameter("artistName");
         String albumName = req.getParameter("albumName");
         Ad ad = DaoFactory.getAdsDao().getById(id);
-        Artist artist = DaoFactory.getArtistsDao().searchArtistsByName(artistName);
-        Album album = DaoFactory.getAlbumsDao().searchAlbumsByTitle(albumName);
+//        Artist artist = DaoFactory.getArtistsDao().searchArtistsByName(artistName);
+//        Album album = DaoFactory.getAlbumsDao().searchAlbumsByTitle(albumName);
         try {
             req.setAttribute("ad", ad);
-            req.setAttribute("artist", artist);
-            req.setAttribute("album", album);
+//            req.setAttribute("artist", artist);
+//            req.setAttribute("album", album);
         } catch (Exception e) {
             e.printStackTrace();
         }
