@@ -38,7 +38,7 @@ public class EditAdServlet extends HttpServlet {
 
         Ad updatedAd = new Ad(id, user.getId(), title, description);
 
-        DaoFactory.getAdsDao().updateAd(updatedAd);
+//        DaoFactory.getAdsDao().updateAd(updatedAd);
 
         resp.sendRedirect("/details?id=" + id);
     }

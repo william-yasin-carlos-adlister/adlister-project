@@ -2,6 +2,7 @@ package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.Album;
+import com.codeup.adlister.models.Artist;
 import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
@@ -60,12 +61,17 @@ public class MySQLAlbumsDao implements Albums {
 
 
     public Long insert(Album album) {
+        Artist artist = new Artist();
         try {
-            String insertQuery = "INSERT INTO albums(title, artist_id, price) VALUES (?, artist_id = LAST_INSERT_ID(), ?)";
+            String insertQuery = "INSERT INTO albums(title, price) VALUES (?, ?)";
+            String updateQuery = "UPDATE albums SET artist_id = replace(artist_id, (SELECT name FROM artists where name = ?), null)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt1 = connection.prepareStatement(updateQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, album.getTitle());
             stmt.setDouble(2, album.getPrice());
+            stmt1.setString(1, artist.getName());
             stmt.executeUpdate();
+            stmt1.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             return rs.getLong(1);

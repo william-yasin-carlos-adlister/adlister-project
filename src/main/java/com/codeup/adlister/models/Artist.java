@@ -5,6 +5,8 @@ public class Artist {
     private long id;
     private String name;
 
+    public Artist(){}
+
     public Artist(long id, String name) {
         this.id = id;
         this.name = name;
