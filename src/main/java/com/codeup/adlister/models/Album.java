@@ -7,9 +7,9 @@ public class Album {
     private long artistID;
     private double price;
 
+    public Album(){}
 
     public Album(long id, String title, long artistID, double price) {
-
         this.id = id;
         this.title = title;
         this.artistID = artistID;

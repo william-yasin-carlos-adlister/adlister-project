@@ -1,6 +1,8 @@
 package com.codeup.adlister.dao;
 
 import com.codeup.adlister.models.Ad;
+import com.codeup.adlister.models.Album;
+import com.codeup.adlister.models.Artist;
 import com.mysql.cj.jdbc.Driver;
 
 import java.io.FileInputStream;
@@ -40,13 +42,21 @@ public class MySQLAdsDao implements Ads {
 
     @Override
     public Long insert(Ad ad) {
+        Artist artist = new Artist();
+        Album album = new Album();
         try {
-            String insertQuery = "INSERT INTO wax_ads(user_id, ad_title, description, album_id) VALUES (?, ?, ?, LAST_INSERT_ID())";
+            String insertQuery = "INSERT INTO wax_ads(user_id, ad_title, description) VALUES (?, ?, ?)";
+            String updateQuery = "UPDATE wax_ads SET artist_id = replace(artist_id, (SELECT name FROM artists where name = ?), null)," +
+                    "album_id = replace(album_id, (SELECT title FROM albums where title = ?), null)";
             PreparedStatement stmt = connection.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt1 = connection.prepareStatement(updateQuery, Statement.RETURN_GENERATED_KEYS);
             stmt.setLong(1, ad.getUserId());
             stmt.setString(2, ad.getAdTitle());
             stmt.setString(3, ad.getDescription());
+            stmt1.setString(1, artist.getName());
+            stmt1.setString(2, album.getTitle());
             stmt.executeUpdate();
+            stmt1.executeUpdate();
             ResultSet rs = stmt.getGeneratedKeys();
             rs.next();
             return rs.getLong(1);
@@ -74,6 +84,8 @@ public class MySQLAdsDao implements Ads {
         return new Ad(
             rs.getLong("id"),
             rs.getLong("user_id"),
+            rs.getLong("artist_id"),
+            rs.getLong("album_id"),
             rs.getString("ad_title"),
             rs.getString("description")
         );
