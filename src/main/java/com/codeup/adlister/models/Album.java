@@ -6,6 +6,7 @@ public class Album {
     private String title;
     private long artistID;
     private double price;
+    private Artist artist;
 
     public Album(){}
 
@@ -59,5 +60,13 @@ public class Album {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
     }
 }

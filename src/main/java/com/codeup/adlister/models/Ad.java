@@ -7,9 +7,18 @@ public class Ad {
     private long albumId;
     private String adTitle;
     private String description;
+    private Album album;
 
     public Ad(long id, long userId, long artistId, long albumId, String adTitle, String description) {
         this.id = id;
+        this.userId = userId;
+        this.artistId = artistId;
+        this.albumId = albumId;
+        this.adTitle = adTitle;
+        this.description = description;
+    }
+
+    public Ad(long userId, long artistId, long albumId, String adTitle, String description) {
         this.userId = userId;
         this.artistId = artistId;
         this.albumId = albumId;
@@ -66,5 +75,21 @@ public class Ad {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public long getArtistId() {
+        return artistId;
+    }
+
+    public long getAlbumId() {
+        return albumId;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 }
