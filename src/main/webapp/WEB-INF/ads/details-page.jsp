@@ -22,7 +22,7 @@
                     <a href="/ads" class="btn btn-primary">Ads</a>
                     <a href="/ads/edit?id=${ad.id}" class="btn btn-success">Edit</a>
                     <form action="/details" method="POST">
-                        <button>Delete</button>
+                        <button class="btn btn-danger mt-1">Delete</button>
                         <input type="hidden" value="${ad.id}" name="id">
                     </form>
                 </div>
