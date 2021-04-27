@@ -12,11 +12,12 @@
         <jsp:param name="title" value="Edit Ad" />
     </jsp:include>
 </head>
-<body>
+<body style="background-color: darkslategrey">
 <jsp:include page="/WEB-INF/partials/navbar.jsp" />
-<div class="container">
-    <h1>Edit Ad</h1>
-    <form action="/ads/edit" method="post">
+<div class="container mt-4" style="background-color: azure; height: 90vh">
+    <div class="row justify-content-center align-items-center" style="height: 90vh">
+    <form class="col-8" action="/ads/edit" method="post">
+        <h1 class="text-center mb-5">Edit Ad</h1>
         <div class="form-group">
             <label for="title">Title</label>
            <input id="title" name="title" class="form-control" type="text" placeholder="TITLE" value="${ad.title}" required> <%-- adding required to field to make sure it's not left empty by user--%>
@@ -28,6 +29,7 @@
         <input type="hidden" value="${ad.id}" name="id">
         <input type="submit" class="btn btn-block btn-success" value="Update">
     </form>
+</div>
 </div>
 
 </body>
