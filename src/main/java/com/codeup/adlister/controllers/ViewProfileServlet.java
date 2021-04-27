@@ -14,11 +14,12 @@ import java.io.IOException;
 public class ViewProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getSession().getAttribute("user") == null) {
-            long id = Long.parseLong(request.getParameter("userId"));
-            request.setAttribute("ads", DaoFactory.getAdsDao().adsByUserId(id));
-            request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
-        }
+        // Started code logic to allow visitors to view other users ads on their profile page with jsp view logic
+//        if (request.getSession().getAttribute("user") == null) {
+//            long id = Long.parseLong(request.getParameter("userId"));
+//            request.setAttribute("ads", DaoFactory.getAdsDao().adsByUserId(id));
+//            request.getRequestDispatcher("/WEB-INF/profile.jsp").forward(request, response);
+//        }
 
 
         User loggedInUser = (User) request.getSession().getAttribute("user");

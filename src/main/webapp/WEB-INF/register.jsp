@@ -2,14 +2,15 @@
 <html>
 <head>
     <jsp:include page="partials/head.jsp">
-        <jsp:param name="title" value="Register For Our Site!" />
+        <jsp:param name="title" value="Register For Our Site!"/>
     </jsp:include>
 </head>
-<body>
-    <jsp:include page="partials/navbar.jsp" />
-    <div class="container">
-        <h1>Please fill in your information.</h1>
-        <form action="/register" method="post">
+<body style="background-color: darkslategrey">
+<jsp:include page="partials/navbar.jsp"/>
+<div class="container mt-4" style="background-color: azure; height: 90vh">
+    <div class="row justify-content-center align-items-center" style="height: 90vh">
+        <form class="col-8" action="/register" method="post">
+            <h1 class="text-center mb-5">Please fill in your information</h1>
             <div class="form-group">
                 <label for="username">Username</label>
                 <input id="username" name="username" class="form-control" type="text">
@@ -29,5 +30,6 @@
             <input type="submit" class="btn btn-primary btn-block">
         </form>
     </div>
+</div>
 </body>
 </html>
