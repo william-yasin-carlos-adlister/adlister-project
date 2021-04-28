@@ -55,6 +55,21 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+    @Override
+    public Long updateAd(Ad ad) {
+        String updateQuery = "UPDATE ads SET title = ?, description = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(updateQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, ad.getTitle());
+            stmt.setString(2, ad.getDescription());
+            stmt.setLong(3, ad.getId());
+            stmt.executeUpdate();
+            return ad.getId();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating ad", e);
+        }
+    }
+
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
             rs.getLong("id"),
@@ -71,4 +86,61 @@ public class MySQLAdsDao implements Ads {
         }
         return ads;
     }
+
+    public Ad getById(long id) {
+        try {
+            String insertQuery = "SELECT * FROM ads WHERE id = ? LIMIT 1";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery); //for connection
+            stmt.setLong(1,id);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+             return extractAd(rs);
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving ad.", e);
+        }
+    }
+
+    public void deleteAd(long id) {
+
+        try {
+            String deleteQuery = "DELETE FROM ads WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(deleteQuery);
+            stmt.setLong(1, id);
+            stmt.execute();
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting ad", e);
+        }
+
+    }
+
+    public List<Ad> searchAdsByTitle(String title) {
+        PreparedStatement stmt = null;
+        String sqlSearch = "SELECT * FROM ads WHERE title LIKE ?";
+        title = "%" + title + "%";
+        try {
+            stmt = connection.prepareStatement(sqlSearch);
+            stmt.setString(1, title);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error retrieving ads search by title.", e);
+        }
+    }
+
+    public List<Ad> adsByUserId(long userId) {
+        String searchSql = "SELECT * FROM ads WHERE user_id = ?";
+        PreparedStatement stmt = null;
+        try {
+            stmt = connection.prepareStatement(searchSql);
+            stmt.setLong(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            return createAdsFromResults(rs);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error finding ads by userId.", e);
+        }
+    }
+
 }

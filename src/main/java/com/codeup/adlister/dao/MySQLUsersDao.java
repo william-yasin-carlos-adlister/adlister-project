@@ -1,5 +1,6 @@
 package com.codeup.adlister.dao;
 
+import com.codeup.adlister.models.Ad;
 import com.codeup.adlister.models.User;
 import com.mysql.cj.jdbc.Driver;
 
@@ -62,5 +63,48 @@ public class MySQLUsersDao implements Users {
                 rs.getString("password")
         );
     }
+
+
+    public void DeleteUserById(long id) {
+        try {
+            String insertQuery = "DELETE FROM users WHERE id = ?";
+            PreparedStatement stmt = connection.prepareStatement(insertQuery); //connection
+            stmt.setLong(1, id);
+            stmt.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error deleting user.", e);
+        }
+    }
+
+
+    public Long updateUser(User user) {
+        String updateQuery = "UPDATE users SET username = ?, email = ? WHERE id = ?";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(updateQuery, Statement.RETURN_GENERATED_KEYS);
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getEmail());
+            stmt.setLong(3, user.getId());
+            stmt.executeUpdate();
+            return user.getId();
+        } catch (SQLException e) {
+            throw new RuntimeException("Error updating user", e);
+        }
+    }
+
+
+//    public User getUserById(long id) {
+//        try {
+//            String insertQuery = "SELECT * FROM ads WHERE id = ? LIMIT 1";
+//            PreparedStatement stmt = connection.prepareStatement(insertQuery); //for connection
+//            stmt.setLong(1,id);
+//            ResultSet rs = stmt.executeQuery();
+//            while (rs.next()) {
+//                return extractUser(rs);
+//            }
+//            return null;
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error retrieving username.", e);
+//        }
+//    }
 
 }
